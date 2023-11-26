@@ -6,38 +6,38 @@ const pokemons = require('./mock-pokemon')
 
 let sequelize
 
-/*if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     sequelize = new Sequelize(
-        'kk8u5y871hfoaw9y',
-        't09tvm6qofrtvc7h',
-        'ryujse9ftf40wpqn',
+        'l2099s32g14tcg80',
+        'eef8bi16gea5fxm0',
+        'qy11ujver9xfeyhj',
         {
-            host: 'klbcedmmqp7w17ik.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+            host: 'iu51mf0q32fkhfpl.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
             dialect: 'mariadb',
-            port: '3307',
+            port: '3306',
             dialectOptions: {
                 timezone: 'Etc/GMT-2',
             },
-            logging: false,
+            logging: true,
         },
     )
-} else {*/
-sequelize = new Sequelize('pokedex', 'root', '', {
-    host: 'localhost',
-    port: '3307',
-    dialect: 'mariadb',
-    dialectOptions: {
-        timezone: 'Etc/GMT-2',
-    },
-    logging: false,
-})
-//}
+} else {
+    sequelize = new Sequelize('pokedex', 'root', '', {
+        host: 'localhost',
+        port: '3307',
+        dialect: 'mariadb',
+        dialectOptions: {
+            timezone: 'Etc/GMT-2',
+        },
+        logging: false,
+    })
+}
 
 const Pokemon = PokemonModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
 
 const initDb = () => {
-    return sequelize.sync({ force: true }).then((_) => {
+    return sequelize.sync().then((_) => {
         pokemons.map((pokemon) => {
             Pokemon.create({
                 name: pokemon.name,
