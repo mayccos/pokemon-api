@@ -6,7 +6,7 @@ const pokemons = require('./mock-pokemon')
 
 let sequelize
 
-if (process.env.NODE_ENV === 'production') {
+/*if (process.env.NODE_ENV === 'production') {
     sequelize = new Sequelize(
         'kk8u5y871hfoaw9y',
         't09tvm6qofrtvc7h',
@@ -21,17 +21,17 @@ if (process.env.NODE_ENV === 'production') {
             logging: false,
         },
     )
-} else {
-    sequelize = new Sequelize('pokedex', 'root', '', {
-        host: 'localhost',
-        port: '3307',
-        dialect: 'mariadb',
-        dialectOptions: {
-            timezone: 'Etc/GMT-2',
-        },
-        logging: false,
-    })
-}
+} else {*/
+sequelize = new Sequelize('pokedex', 'root', '', {
+    host: 'localhost',
+    port: '3307',
+    dialect: 'mariadb',
+    dialectOptions: {
+        timezone: 'Etc/GMT-2',
+    },
+    logging: false,
+})
+//}
 
 const Pokemon = PokemonModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)

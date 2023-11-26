@@ -13,7 +13,7 @@ app.use(favicon(__dirname + '/favicon.ico'))
 
 sequelize.initDb()
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.json('Hello, Heroku ! 👋')
 })
 
