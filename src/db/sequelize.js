@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production') {
             dialectOptions: {
                 timezone: 'Etc/GMT-2',
             },
-            logging: true,
+            logging: false,
         },
     )
 } else {
