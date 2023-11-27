@@ -11,7 +11,7 @@ app.use(favicon(__dirname + '/favicon.ico'))
     .use(bodyParser.json())
     .use(cors())
 
-sequelize.initDb()
+//sequelize.initDb()
 
 app.get('/', (req, res) => {
     res.json('Hello, Heroku ! 👋')
