@@ -37,8 +37,8 @@ const Pokemon = PokemonModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
 
 const initDb = () => {
-    return sequelize.sync({ alter: true }).then((_) => {
-        pokemons.map((pokemon) => {
+    return sequelize.sync({ force: true }).then((_) => {
+        /*pokemons.map((pokemon) => {
             Pokemon.create({
                 name: pokemon.name,
                 hp: pokemon.hp,
@@ -46,12 +46,18 @@ const initDb = () => {
                 picture: pokemon.picture,
                 types: pokemon.types,
             }).then((pokemon) => console.log(pokemon.toJSON()))
-        })
+        })*/
 
         bcrypt
             .hash('pikachu', 10)
             .then((hash) =>
-                User.create({ username: 'pikachu', password: hash }),
+                User.create({
+                    nom: 'Becker',
+                    prenom: 'Jean-Christophe',
+                    pseudo: 'mayccos',
+                    password: hash,
+                    email: 'mothos@hotmail.fr',
+                }),
             )
             .then((user) => console.log(user.toJSON()))
 

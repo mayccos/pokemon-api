@@ -1,22 +1,22 @@
-const { Pokemon } = require('../db/sequelize')
+const { User } = require('../../db/sequelize')
 const { ValidationError, UniqueConstraintError } = require('sequelize')
-const auth = require('../auth/auth')
+const auth = require('../../auth/auth')
 
 module.exports = (app) => {
-    app.put('/api/pokemons/:id', auth, (req, res) => {
+    app.put('/api/users/:id', auth, (req, res) => {
         const id = req.params.id
-        Pokemon.update(req.body, {
+        User.update(req.body, {
             where: { id: id },
         })
             .then((_) => {
-                return Pokemon.findByPk(id).then((pokemon) => {
-                    if (pokemon === null) {
-                        const message = `Le pokémon demandé n'existe pas. Réessayez avec un autre identifiant.`
+                return User.findByPk(id).then((user) => {
+                    if (user === null) {
+                        const message = `L'utilisateur demandé n'existe pas. Réessayez avec un autre identifiant.`
                         return res.status(404).json({ message })
                     }
 
-                    const message = `Le pokémon ${pokemon.name} a bien été modifié.`
-                    res.json({ message, data: pokemon })
+                    const message = `L'utilisateur ${user.name} a bien été modifié.`
+                    res.json({ message, data: user })
                 })
             })
             .catch((error) => {
@@ -30,7 +30,7 @@ module.exports = (app) => {
                         .status(400)
                         .json({ message: 'error.message', data: error })
                 }
-                const message = `Le pokémon n'a pas pu être modifié. Réessayez dans quelques instants.`
+                const message = `L'utilisateur' n'a pas pu être modifié. Réessayez dans quelques instants.`
                 res.status(500).json({ message, data: error })
             })
     })
